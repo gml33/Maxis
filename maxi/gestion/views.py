@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from .models import auto,empleado,servicio
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator
+from django.db.models import Q
 
 def home(request):
     return render(request, 'registro/index.html')
@@ -151,7 +152,12 @@ def detalle_servicio(request, pk):
 
 @login_required(login_url='my-login')
 def listar_servicios(request):
+    busqueda = request.POST.get("patente")
     servicios_all = servicio.objects.all().order_by('-fecha')
+    if busqueda:
+        servicios_all = servicio.objects.filter(
+            Q(vehiculo__patente__icontains=busqueda)
+        ).distinct().order_by('-fecha')
     paginator = Paginator(servicios_all, 10)
     page = request.GET.get('page')
     servicios = paginator.get_page(page)

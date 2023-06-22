@@ -11,12 +11,7 @@
             </li>&nbsp;&nbsp;&nbsp;
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'listar_autos' %}">autos &nbsp; <i class="fa fa-home" aria-hidden="true"></i> </a>
-            </li>&nbsp;&nbsp;&nbsp;
-            <form class="d-flex" role="search" method="POST">
-                {% csrf_token %}
-                <input class="form-control me-2" type="search" name='patente' placeholder="Patente" aria-label="Search">
-                <a class="nav-link" href="{% url 'service' %}"><button class="btn btn-success" type="submit">Buscar</button></a>
-            </form>            
+            </li>&nbsp;&nbsp;&nbsp;                        
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'user-logout' %}">Salir &nbsp; <i class="fa fa-sign-out" aria-hidden="true"></i></a>
             </li>

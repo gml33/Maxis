@@ -4,7 +4,23 @@
     <a class="btn btn-outline-primary btn-small" href="{% url 'agregar_servicio' %}">
         Agregar Servicio
     </a>
+    <br>
+    <br>
+    <!--formulario de busqueda por patente-->
+    <form method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+            <div class="form-group">          
+                <div class="input-group mb-3">
+                    <input type="text" name='patente' class="form-control" placeholder="{{request.POST.patente}}" aria-label="Recipient's username" aria-describedby="button-addon2">
+                    <button class="btn btn-primary" type="submit">Buscar</button>
+                </div>
+            </div>
+        </div>
+    </form>      
+    <!--fin del formulario-->    
     <hr>
+    {% if servicios %}
     <table class="table table-hover table-bordered">
         <thead class="table-light">
             <tr>
@@ -15,8 +31,7 @@
                 <th scope="col">Ver</th>
             </tr>
         </thead>
-        <tbody>
-            {% if servicios %}
+        <tbody>            
             {% for servicio in servicios %}
             <tr>
                 <td>{{servicio.id}}</td>
@@ -44,5 +59,8 @@
         <a type="button" class="btn btn-secondary" a href="?page={{servicios.num_pages}}">>></a>
     </div>
 </div>
+{% else %}
+<h2>No hay servicios relacionados a esa patente.</h2>
     {% endif %}
+    
 {% endblock %}
