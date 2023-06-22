@@ -1,0 +1,43 @@
+{% extends 'gestion/base.html' %}
+{% block content %}
+    <h5>Bienvenido {{user}}</h5>
+    <hr>
+    <table class="table table-hover table-bordered">
+        <thead class="table-light">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Fecha</th>
+                <th scope="col">Ver</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if autos %}
+            {% for auto in autos %}
+            <tr>
+                <td>
+                    {{auto.id}}
+                </td>
+                <td>{{auto.patente}} </td>
+                <td><a href="{% url 'detalle_auto' auto.id %}">detalle</a></td>
+            </tr>
+            {% endfor %}
+            
+        </tbody>
+    </table>
+    <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+    <div class="btn-group me-2" role="group" aria-label="First group">
+        {% if autos.number != 1 %}
+        <a type="button" class="btn btn-secondary" href="?page=1"><<</a>
+        {% endif %}
+        {% if autos.has_previous %}
+        <a type="button" class="btn btn-secondary" href="?page={{autos.previous_page_number}}">{{autos.previous_page_number}}</a>
+        {% endif %}
+        <a type="button" class="btn btn-secondary" href="?page={{autos.number}}">{{autos.number}}</a>
+        {% if autos.has_next %}
+        <a type="button" class="btn btn-secondary" href="?page={{autos.next_page_number}}">{{autos.next_page_number}}</a>
+        {% endif %}
+        <a type="button" class="btn btn-secondary" a href="?page={{autos.num_pages}}">>></a>
+    </div>
+</div>
+    {% endif %}
+{% endblock %}

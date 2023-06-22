@@ -1,0 +1,48 @@
+{% extends 'gestion/base.html' %}
+{% block content %}
+    <h5>Bienvenido {{user}}</h5>
+    <a class="btn btn-outline-primary btn-small" href="{% url 'agregar_servicio' %}">
+        Agregar Servicio
+    </a>
+    <hr>
+    <table class="table table-hover table-bordered">
+        <thead class="table-light">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Fecha</th>
+                <th scope="col">Vehiculo</th>
+                <th scope="col">Detalle</th>
+                <th scope="col">Ver</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if servicios %}
+            {% for servicio in servicios %}
+            <tr>
+                <td>{{servicio.id}}</td>
+                <td>{{servicio.fecha}}</td>
+                <td>{{servicio.vehiculo}}</td>
+                <td>{{servicio.detalle|truncatechars:15}}</td>
+                <td><a href="{% url 'detalle_servicio' servicio.id %}">detalle</a></td>
+            </tr>
+            {% endfor %}
+            
+        </tbody>
+    </table>
+    <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+    <div class="btn-group me-2" role="group" aria-label="First group">
+        {% if servicios.number != 1 %}
+        <a type="button" class="btn btn-secondary" href="?page=1"><<</a>
+        {% endif %}
+        {% if servicios.has_previous %}
+        <a type="button" class="btn btn-secondary" href="?page={{servicios.previous_page_number}}">{{servicios.previous_page_number}}</a>
+        {% endif %}
+        <a type="button" class="btn btn-secondary" href="?page={{servicios.number}}">{{servicios.number}}</a>
+        {% if servicios.has_next %}
+        <a type="button" class="btn btn-secondary" href="?page={{servicios.next_page_number}}">{{servicios.next_page_number}}</a>
+        {% endif %}
+        <a type="button" class="btn btn-secondary" a href="?page={{servicios.num_pages}}">>></a>
+    </div>
+</div>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'gestion/base.html' %}
+{% block content %}
+<a class="btn btn-outline-primary btn-small" href="{% url 'agregar_auto' %}">
+    Agregar Auto
+</a>
+<hr>
+    <table class="table table-hover table-bordered">
+        <thead class="table-light">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Patente</th>
+                <th scope="col">Ver</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if autos %}
+            {% for auto in autos %}
+            <tr>
+                <td>
+                    {{auto.id}}
+                </td>
+                <td>{{auto.patente}}</td>
+                <td><a href="{% url 'detalle_auto' auto.id %}">detalle</a></td>
+            </tr>
+            {% endfor %}
+            {% endif %}
+        </tbody>
+    </table>
+{% endblock %}

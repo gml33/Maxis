@@ -1,0 +1,26 @@
+{% extends 'gestion/base.html' %}
+{% block content %}
+        <div class="card">
+            <strong>
+                <br>
+                &nbsp;
+                &nbsp;
+                {{servicio.id}}
+                {{servicio.fecha}}
+            </strong>
+            <hr>
+            <div class="card-body">
+                <p><strong>ID: </strong>{{servicio.id}}</p>
+                <p><strong>Vehiculo:</strong>{{servicio.vehiculo}}</p>
+                <p><strong>Fecha: </strong>{{servicio.fecha}}</p>
+                <p><strong>Detalle: </strong>{{servicio.detalle}}</p>
+                <p><strong>Kilometraje: </strong>{{servicio.kilometraje}}</p>
+            </div>
+        </div>
+        <br>
+        <a href="{% url 'listar_servicios' %}" class="btn btn-secondary">Volver</a>
+        &nbsp;
+        <a href="{% url 'modificar_servicio' servicio.id %}" class="btn btn-primary">Modificar</a>
+        &nbsp;
+        <a href="{% url 'eliminar_servicio' servicio.id %}" class="btn btn-danger">Eliminar</a>
+{% endblock %}
