@@ -17,7 +17,6 @@ urlpatterns = [
     path('agregar-servicio/',  views.agregar_servicio, name='agregar_servicio'),
     path('detalle-servicio/<int:pk>/',  views.detalle_servicio, name='detalle_servicio'),
     path('listar-servicios/',  views.listar_servicios, name='listar_servicios'),
-    path('service/',  views.service, name='service'),
     path('modificar-servicio/<int:pk>/', views.modificar_servicio, name='modificar_servicio'),
     path('eliminar-servicio/<int:pk>/', views.eliminar_servicio, name='eliminar_servicio'),
     ]

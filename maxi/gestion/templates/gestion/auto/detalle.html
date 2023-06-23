@@ -14,11 +14,37 @@
                 <p><strong>Patente:</strong>{{auto.patente}}</p>
             </div>
         </div>
+        <br>        
+        {% if servicios %}
+        <table class="table table-hover table-bordered">
+            <thead class="table-light">
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Fecha</th>
+                    <th scope="col">Vehiculo</th>
+                    <th scope="col">Detalle</th>
+                    <th scope="col">Ver</th>
+                </tr>
+            </thead>
+            <tbody>            
+                {% for servicio in servicios %}
+                <tr>
+                    <td>{{servicio.id}}</td>
+                    <td>{{servicio.fecha}}</td>
+                    <td>{{servicio.vehiculo}}</td>
+                    <td>{{servicio.detalle|truncatechars:15}}</td>
+                    <td><a href="{% url 'detalle_servicio' servicio.id %}">detalle</a></td>
+                </tr>
+                {% endfor %}            
+            </tbody>
+        </table>    
+        {% else %}
+            <h2>No hay servicios relacionados a esa patente.</h2>
+        {% endif %}
         <br>
         <a href="{% url 'listar_autos' %}" class="btn btn-secondary">Volver</a>
         &nbsp;
         <a href="{% url 'modificar_auto' auto.id %}" class="btn btn-primary">Modificar</a>
         &nbsp;
         <a href="{% url 'eliminar_auto' auto.id %}" class="btn btn-danger">Eliminar</a>
-
 {% endblock %}

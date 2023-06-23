@@ -40,14 +40,7 @@ def my_login(request):
 
 @login_required(login_url='my-login')
 def dashboard(request):
-    autos_all = auto.objects.all().order_by('id')
-    paginator = Paginator(autos_all, 10)
-    page = request.GET.get('page')
-    autos = paginator.get_page(page)
-    context = {
-        'autos':autos,
-    }
-    return render(request, 'gestion/dashboard.html', context=context)
+    return render(request, 'gestion/dashboard.html')
 
 def user_logout(request):
     auth.logout(request)
@@ -61,7 +54,7 @@ def agregar_auto(request):
         form = autoForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('dashboard')
+            return redirect('')
     context = {
         'form':form
     }
@@ -89,9 +82,11 @@ def modificar_auto(request, pk):
 
 @login_required(login_url='my-login')
 def detalle_auto(request, pk):
-    auto_seleccionado = auto.objects.get(id=pk)    
+    auto_seleccionado = auto.objects.get(id=pk)
+    servicios = servicio.objects.filter(vehiculo=auto_seleccionado).order_by('-fecha')    
     context = {
-        'auto':auto_seleccionado
+        'auto':auto_seleccionado,
+        'servicios':servicios
     }
     return render(request, 'gestion/auto/detalle.html', context=context)
 
@@ -159,18 +154,6 @@ def listar_servicios(request):
             Q(vehiculo__patente__icontains=busqueda)
         ).distinct().order_by('-fecha')
     paginator = Paginator(servicios_all, 10)
-    page = request.GET.get('page')
-    servicios = paginator.get_page(page)
-    context = {
-        'servicios':servicios,
-    }
-    return render(request, 'gestion/servicio/listar.html', context=context)
-
-@login_required(login_url='my-login')
-def service(request):
-    vehiculo = request.POST.get['patente']  
-    servicio_vehiculo = servicio.objects.filter(vehiculo=vehiculo).order_by('-fecha')
-    paginator = Paginator(servicio_vehiculo, 10)
     page = request.GET.get('page')
     servicios = paginator.get_page(page)
     context = {
