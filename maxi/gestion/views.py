@@ -83,10 +83,12 @@ def modificar_auto(request, pk):
 @login_required(login_url='my-login')
 def detalle_auto(request, pk):
     auto_seleccionado = auto.objects.get(id=pk)
-    servicios = servicio.objects.filter(vehiculo=auto_seleccionado).order_by('-fecha')    
+    servicios = servicio.objects.filter(vehiculo=auto_seleccionado).order_by('-fecha')
+    cantidad_servicios = servicio.objects.filter(vehiculo=auto_seleccionado).count()
     context = {
         'auto':auto_seleccionado,
-        'servicios':servicios
+        'servicios':servicios,
+        'cantidad_servicios':cantidad_servicios,
     }
     return render(request, 'gestion/auto/detalle.html', context=context)
 

@@ -1,6 +1,6 @@
 {% extends 'gestion/base.html' %}
 {% block content %}
-    <h5>Bienvenido {{user}}</h5>
+    <h5>Bienvenido {{user|upper}}</h5>
     <a class="btn btn-outline-primary btn-small" href="{% url 'agregar_servicio' %}">
         Agregar Servicio
     </a>
