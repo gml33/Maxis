@@ -19,4 +19,10 @@ urlpatterns = [
     path('listar-servicios/',  views.listar_servicios, name='listar_servicios'),
     path('modificar-servicio/<int:pk>/', views.modificar_servicio, name='modificar_servicio'),
     path('eliminar-servicio/<int:pk>/', views.eliminar_servicio, name='eliminar_servicio'),
+    # -----------------------empleados---------------------------------
+    path('agregar-empleado/',  views.agregar_empleado, name='agregar_empleado'),
+    path('detalle-empleado/<int:pk>/',  views.detalle_empleado, name='detalle_empleado'),
+    path('listar-empleados/',  views.listar_empleados, name='listar_empleados'),
+    path('modificar-empleado/<int:pk>/', views.modificar_empleado, name='modificar_empleado'),
+    path('eliminar-empleado/<int:pk>/', views.eliminar_empleado, name='eliminar_empleado'),
     ]

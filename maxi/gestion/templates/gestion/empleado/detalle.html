@@ -1,0 +1,19 @@
+{% extends 'gestion/base.html' %}
+{% block content %}
+        <div class="card">
+            <strong>
+                <br>
+                &nbsp;
+                &nbsp;
+                {{empleado.id}}
+                {{empleado.nombre}}
+                {{empleado.apellido}}
+            </strong>
+        </div>
+        <br>
+        <a href="{% url 'listar_empleados' %}" class="btn btn-secondary">Volver</a>
+        &nbsp;
+        <a href="{% url 'modificar_empleado' empleado.id %}" class="btn btn-primary">Modificar</a>
+        &nbsp;
+        <a href="{% url 'eliminar_empleado' empleado.id %}" class="btn btn-danger">Eliminar</a>
+{% endblock %}

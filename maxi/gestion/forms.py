@@ -34,3 +34,11 @@ class servicioForm(forms.ModelForm):
     class Meta:
         model=servicio
         fields = '__all__'
+
+
+class empleadoForm(forms.ModelForm):
+    apellido = forms.CharField(widget=forms.TextInput(attrs={'type': 'text'}))  
+    
+    class Meta:
+        model=empleado
+        fields = '__all__'
